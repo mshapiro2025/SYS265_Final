@@ -1,0 +1,25 @@
+@startuml
+!include <office/Servers/application_server>
+!include <office/Servers/database_server>
+
+title SYS265 Final Project Network Diagram Milestone 1
+
+nwdiag {
+  
+    internet [ shape = cloud ];
+    internet [    fw_placeholder];
+    
+  network LAN_placeholder {
+      address = "172.16.1.x";
+      description = "LAN"
+      fw01 [address = ".2"]
+      ad01 [addess = ".12"]
+      ad02 [address = ".13"]
+      
+    group DC {
+      ad01 [addess = ".4"]
+      ad02 [address = ".3"]
+}
+
+
+@enduml
