@@ -1,0 +1,29 @@
+# Mediawiki with MariaDB Database
+
+version: '3'
+services:
+  mediawiki:
+    image: mediawiki
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - database
+    volumes:
+      - images:/var/www/html/images
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php
+    database:
+      image: mariadb
+      restart: always
+      environment:
+        MYSQL_DATABASE: mediawiki
+        MYSQL_USER: mediawiki
+        MYSQL_PASSWORD: SYS265!
+        MYSQL_ROOT_PASSWORD: 'SYS265!'
+        MYSQL_DATABASE_HOST: mediawiki
+      volumes:
+        - db:/var/lib/mysql
+        
+volumes:
+  images:
+  db:
