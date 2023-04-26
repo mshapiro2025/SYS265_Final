@@ -6,31 +6,36 @@
     
   tasks:
    
-   - nam: Install Nginx
-    yum:
-      name: nginx
-      state: latest
-  - name: Enable nginx
-    systemd:
-      name: nginx
-      state: started
-  - name: Move files
-    copy:
-      src: "{{ app_root }}"
-      dest: "{{ document_root }}"
-      mode: preserve
-  - name: open port 80
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: latest
+        
+    - name: Enable nginx
+      systemd:
+        name: nginx
+        state: started
+        
+    - name: Move files
+      copy:
+        src: "{{ app_root }}"
+        dest: "{{ document_root }}"
+        mode: preserve
+        
+    - name: open port 80
       firewalld:
         service: http
         permanent: yes
         state: enabled
-  - name: Reload firewall
-    systemd:
-      name: firewalld
-      state: reloaded
-  - name: Restart Nginx
-    systemd:
-      name: nginx
-      state: restarted
+        
+    - name: Reload firewall
+      systemd:
+        name: firewalld
+        state: reloaded
+        
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
       
       
